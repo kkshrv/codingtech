@@ -1,40 +1,33 @@
-#include "geometry.h"
+#include <typeinfo>
+#include "mathcustom.h"
 #include <iostream>
 
+using namespace std;
 
-int main() {
-    Square* square = new Square(Point(0, 0), Point(40, 0), Point(40, 40), Point(0, 40));
-    square->move(2,2);
-    square->rotate(90);
 
-    Rectangle* rectangle = new Rectangle(Point(0, 0), Point(40, 0), Point(40, 40), Point(0, 40));
-    rectangle->move(2,2);
-    rectangle->rotate(90);
-
-    Parallelogram* parallelogram = new Parallelogram(Point(0, 0), Point(40, 0), Point(40, 40), Point(0, 40));
-    parallelogram->move(2,2);
-    parallelogram->rotate(90);
-
-    Rhombus* rhombus = new Rhombus(Point(0, 0), Point(40, 0), Point(40, 40), Point(0, 40));
-    rhombus->move(2,2);
-    rhombus->rotate(90);
-
-    Line* line1 = new Line(Point(0, 0), Point(40, 0));
-    line1->move(2,2);
-    line1->move(-2, -2);
-    line1->rotate(90);
-
-    Line* line2 = new Line(Point(0, 40), Point(40, 40));
-    Rectangle* rectangle1 = new Rectangle(*line1, *line2);
-
-    // delete (erase) all objects
-    delete square;
-    delete rectangle;
-    delete parallelogram;
-    delete rhombus;
-    delete line1;
-    delete line2;
-    delete rectangle1;
-
-    return 0;
+int main()
+{
+	Vector first = Vector(3, new double[3] {1, 2, 3});
+	Vector second = Vector(3, new double[3] {3, 2, 1});
+	(first + second).print();
+	(first - second).print();
+	cout << first * second << endl << endl;
+	(first.multiply(5)).print();
+	double values[9] = {1, 2, 3, 1, 2, 3, 1, 2, 3};
+	double** inputValues = arraytoPointer(3, 3, values);
+	Matrix m1(3, 3, inputValues);
+	Matrix m2(3, 3, inputValues);
+	(m1+m2).print();
+	(m1-m2).print();
+	(m1*m2).print();
+	(m1.multiply(3)).print();
+	(m1 * first).print();
+	double values1[3] = {1, 2, 3};
+	double** inputValues1 = arraytoPointer(3, 1, values1);
+	Matrix m3(3, 1, inputValues1);
+	(m3 * second).print();
+	m1 = m3;
+	m1.print();
+	first = second;
+	first.print();
 }
